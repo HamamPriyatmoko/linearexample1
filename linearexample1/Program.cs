@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 
 namespace linearexample1
 {
-    internal class Program
+    class Program
     {
-
+        //array to be searched
         int[] arr = new int[20];
-
+        //number of element in the array 
         int n;
-
+        //get the number of element to store in the array
         int i;
         
         public void input()
         {
             while (true)
             {
+                
                 Console.Write("enter the number of element in the array");
                 string s = Console.ReadLine();
                 n = Int32.Parse(s);
@@ -38,6 +39,43 @@ namespace linearexample1
                 string s1 = Console.ReadLine();
                 arr[i] = int.Parse(s1);
             }
+        }
+        public void BinarySearch()
+        {
+            char ch;
+            do
+            {
+                //accept the number to be searched
+                Console.Write("\nEnter the element you want to search :");
+                int item = Convert.ToInt32(Console.ReadLine());
+
+                //apply binary search
+                int lowerbound = 0;
+                int upperbound = 0;
+
+                //obtain the index of the middle element
+                int mid = (lowerbound + upperbound) / 2;
+                int ctr = 1;
+
+                //loop to search for the element in the array 
+                while ((item != arr[mid]) && (ctr <= upperbound))
+                {
+                    if (item == arr[mid])
+                        lowerbound = mid + 1;
+                    else
+                        upperbound = mid - 1;
+                    mid = (lowerbound + upperbound) / 2;
+                    ctr++;
+                }
+                if (item == arr[mid])
+                    Console.WriteLine("\n" + item.ToString() + "found at position" + (mid + 1).ToString());
+                else
+                    Console.WriteLine("\n" + item.ToString() + "not found in the array\n");
+                Console.WriteLine("\nNumber of comparasion : " + ctr);
+
+                Console.Write("\nContinur search (y/n): ");
+                ch = char.Parse(Console.ReadLine().ToUpper());
+            } while ((ch == 'y'));
         }
         static void Main(string[] args)
         {
